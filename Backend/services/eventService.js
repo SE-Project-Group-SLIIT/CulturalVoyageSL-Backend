@@ -56,3 +56,43 @@ module.exports.viewAllEventsService = async(req,res) =>{
         throw err;
     }
 }
+
+module.exports.updateEventService = async (req, res) => {
+    console.log(">>>>>>>>", req)
+    try {
+        const id = req._id;
+        console.log("id",id);
+      let response = await Event.findOneAndUpdate(
+        
+        { _id: id },
+        { $set: {
+            
+            eventName : req.eventName,
+            eventDescription : req.eventDescription,
+            Date : req.Date,
+            Time : req.Time,
+            Location : req.Location,
+            Performer : req.Performer,
+            contactPerson : req.contactPerson,
+            Contact : req.Contact,
+        
+        } },
+  
+      );
+      console.log("res>>", response)
+  
+      if (response) {
+        return {
+          msg: "success",
+          data: response,
+        };
+      } else {
+        return {
+          msg: "fail",
+          data: null,
+        };
+      }
+    } catch (err) {
+      throw err;
+    }
+  };

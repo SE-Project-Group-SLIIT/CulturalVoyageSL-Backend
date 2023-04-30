@@ -17,6 +17,13 @@ router.route("/addEvent").post((req,res) => {
     );
   });
 
+  
+router.route("/updateEvent").put((req, res) => {
+    console.log("req>>>>", req.body)
+  
+    const response = eventController.updateEventController(req.body, res);
+  
+  });
         
 
 module.exports = router;
