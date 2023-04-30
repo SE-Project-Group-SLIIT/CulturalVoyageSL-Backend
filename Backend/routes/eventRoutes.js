@@ -24,6 +24,12 @@ router.route("/updateEvent").put((req, res) => {
     const response = eventController.updateEventController(req.body, res);
   
   });
-        
+
+router.route("/deleteEvent").delete((req, res) => {
+    console.log("req>>>>", req.body)
+    const response = eventController.deleteEventController(req.body, res);
+  
+  });
+  
 
 module.exports = router;

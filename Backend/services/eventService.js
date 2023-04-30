@@ -96,3 +96,28 @@ module.exports.updateEventService = async (req, res) => {
       throw err;
     }
   };
+
+module.exports.deleteEventService = async (req, res) => {
+    try {
+      console.log("request", req)
+      const id = req._id;
+      let response = await Event.findOneAndDelete(
+        { _id: id},
+  
+      );
+  
+      if (response) {
+        return {
+          msg: "success",
+          data: response,
+        };
+      } else {
+        return {
+          msg: "fail",
+          data: null,
+        };
+      }
+    } catch (err) {
+      throw err;
+    }
+  };

@@ -51,3 +51,28 @@ module.exports.updateEventController = async (req, res) => {
       });
     }
   };
+
+  module.exports.deleteEventController = async (req, res) => {
+    try {
+  
+  
+      let eventResponse = await eventService.deleteEventService(req);
+  
+      if (eventResponse.msg === "success") {
+        return res.status(200).send({
+          message: "Event Deleted Successfully",
+          data: eventResponse.data,
+        });
+      } else {
+        return res.status(400).send({
+          message: "Failed to delete event",
+          data: null,
+        });
+      }
+    } catch (err) {
+      return res.status(500).send({
+        message: "Internal server error",
+        err: err.message,
+      });
+    }
+  };
