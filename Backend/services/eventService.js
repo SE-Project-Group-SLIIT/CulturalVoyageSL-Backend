@@ -35,3 +35,24 @@ module.exports.addEventService = async(req,res) =>{
         throw err;
     }
 }
+
+//view all events 
+module.exports.viewAllEventsService = async(req,res) =>{
+    try{
+        let response = await Event.find();
+
+        if(response){
+            return{
+                msg: "success",
+                data: response,
+            };
+        }else{
+            return{
+                msg:"faild",
+                data:response,
+            }
+        }
+    }catch (err){
+        throw err;
+    }
+}

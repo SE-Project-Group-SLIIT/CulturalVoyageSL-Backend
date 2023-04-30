@@ -8,7 +8,15 @@ router.route("/addEvent").post((req,res) => {
          res
         )
 });
-       
+    
+  //route for view Events
+  router.route("/view").get((req, res) => {
+    const response = eventController.viewEventController(
+      req.body.data,
+      res
+    );
+  });
+
         
 
 module.exports = router;
