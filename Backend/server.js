@@ -23,7 +23,7 @@ const eventRoutes = require("./routes/eventRoutes");
 const commentRoutes = require("./routes/commentRoutes")
 
 app.use("/event",eventRoutes);
-app.use("/comment",eventRoutes);
+app.use("/comment",commentRoutes);
 
 app.listen(PORT, () => {
     console.log(`server is up and running on port:${PORT}`);
