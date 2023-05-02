@@ -7,6 +7,7 @@ module.exports.addEventService = async(req,res) =>{
 
         const eventName = req.eventName;
         const eventDescription =req.eventDescription;
+        const eventType = req.eventType;
         const Date = req.Date;
         const Time = req.Time;
         const Location = req.Location;
@@ -17,6 +18,7 @@ module.exports.addEventService = async(req,res) =>{
         const newEvent = new Event({
             eventName, 
             eventDescription, 
+            eventType,
             Date, 
             Time, 
             Location, 
@@ -69,6 +71,7 @@ module.exports.updateEventService = async (req, res) => {
             
             eventName : req.eventName,
             eventDescription : req.eventDescription,
+            eventType :req.eventType,
             Date : req.Date,
             Time : req.Time,
             Location : req.Location,
@@ -121,3 +124,28 @@ module.exports.deleteEventService = async (req, res) => {
       throw err;
     }
   };
+
+
+  //search events 
+module.exports.searchEventsService = async(req,res) =>{
+  console.log("request", req)
+
+  try{
+    const Value = req.eventType;
+      let response = await Event.find({ eventType: { $regex: ".*" + Value + ".*", $options: 'i' } });
+
+      if(response){
+          return{
+              msg: "success",
+              data: response,
+          };
+      }else{
+          return{
+              msg:"faild",
+              data:response,
+          }
+      }
+  }catch (err){
+      throw err;
+  }
+}

@@ -16,6 +16,12 @@ const event = new Schema({
         required : true,
     },
 
+    eventType : {
+        type : String,
+        maxlength : 300,
+        required : true,
+    },
+
     Date : {
         type : String,
         required : true,

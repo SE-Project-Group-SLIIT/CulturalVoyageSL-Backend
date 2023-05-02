@@ -18,6 +18,7 @@ router.route("/addEvent").post((req,res) => {
   });
 
   
+    //route for update Events
 router.route("/updateEvent").put((req, res) => {
     console.log("req>>>>", req.body)
   
@@ -25,11 +26,25 @@ router.route("/updateEvent").put((req, res) => {
   
   });
 
+    //route for delete Events
 router.route("/deleteEvent").delete((req, res) => {
     console.log("req>>>>", req.body)
     const response = eventController.deleteEventController(req.body, res);
   
   });
   
+    //route for search Events by type
+
+router.route("/searchEvents/").get((req, res) => {
+  console.log("req>>>>>",req.body);
+  const response = eventController.searchEventController(
+    req.body,
+    res)
+  });
+
+
+
+
+
 
 module.exports = router;
