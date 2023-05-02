@@ -33,15 +33,23 @@ router.route("/deleteEvent").delete((req, res) => {
   
   });
   
-    //route for search Events by type
+    //route for filter Events by type
 
-router.route("/searchEvents/").get((req, res) => {
+router.route("/filterEvents/").get((req, res) => {
   console.log("req>>>>>",req.body);
   const response = eventController.searchEventController(
     req.body,
     res)
   });
 
+     //route for search Events by name
+
+router.route("/searchEvents/").get((req, res) => {
+  console.log("req>>>>>",req.body);
+  const response = eventController.searchEventByNameController(
+    req.body,
+    res)
+  });
 
 
 

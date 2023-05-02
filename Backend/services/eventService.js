@@ -132,7 +132,9 @@ module.exports.searchEventsService = async(req,res) =>{
 
   try{
     const Value = req.eventType;
-      let response = await Event.find({ eventType: { $regex: ".*" + Value + ".*", $options: 'i' } });
+      let response = await Event.find({ eventType: Value
+        // { $regex: ".*" + Value + ".*", $options: 'i' }
+       });
 
       if(response){
           return{
@@ -149,3 +151,29 @@ module.exports.searchEventsService = async(req,res) =>{
       throw err;
   }
 }
+
+  //search events 
+  module.exports.searchEventsByNameService = async(req,res) =>{
+    console.log("request", req)
+  
+    try{
+      const Value = req.eventName;
+        let response = await Event.find({ eventName: { $regex: ".*" + Value + ".*", $options: 'i' }
+         });
+  
+        if(response){
+            return{
+                msg: "success",
+                data: response,
+            };
+        }else{
+            return{
+                msg:"faild",
+                data:response,
+            }
+        }
+    }catch (err){
+        throw err;
+    }
+  }
+  
