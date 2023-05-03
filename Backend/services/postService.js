@@ -1,8 +1,8 @@
 const { response } = require("express");
 const mongoose = require("mongoose");
-const Comment = require("../models/Comment");
+const Post = require("../models/Posts");
 
-module.exports.addCommentService = async(req,res) =>{
+module.exports.addPostService = async(req,res) =>{
     try{
 
       const message = req.message;
@@ -11,7 +11,7 @@ module.exports.addCommentService = async(req,res) =>{
       const messageStatus = req.messageStatus;
       const keyWords = req.keyWords;
 
-      const newComment = new Comment({
+      const newPost = new Post({
         message, 
         user, 
         likes, 
@@ -19,7 +19,7 @@ module.exports.addCommentService = async(req,res) =>{
         keyWords, 
       });
      
-      const event = await newComment.save();
+      const response = await newPost.save();
         
         return{
             msg: "success",
@@ -31,9 +31,9 @@ module.exports.addCommentService = async(req,res) =>{
 }
 
 //view all events 
-module.exports.viewCommentService = async(req,res) =>{
+module.exports.viewPostService = async(req,res) =>{
     try{
-        let response = await Comment.find();
+        let response = await Post.find();
 
         if(response){
             return{
