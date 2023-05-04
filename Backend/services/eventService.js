@@ -3,31 +3,42 @@ const mongoose = require("mongoose");
 const Event = require("../models/Events");
 
 module.exports.addEventService = async(req,res) =>{
-    try{
+    console.log("req",req);
+  try{
 
         const eventName = req.eventName;
         const eventDescription =req.eventDescription;
         const eventType = req.eventType;
-        const Date = req.Date;
+        const dateFrom = req.dateFrom;
+        const dateTo = req.dateTo;
         const Time = req.Time;
         const Location = req.Location;
         const Performer = req.Performer;
         const contactPerson = req.contactPerson;
         const Contact = req.Contact;
+        const imageOne = req.imageOne;
+        const imageTwo = req.imageTwo;
+        const imageThree = req.imageThree;
+        const Agenda = req.Agenda;
 
         const newEvent = new Event({
             eventName, 
             eventDescription, 
             eventType,
-            Date, 
+            dateFrom,
+            dateTo, 
             Time, 
             Location, 
             Performer, 
             contactPerson, 
-            Contact 
+            Contact,
+            imageOne,
+            imageTwo,
+            imageThree,
+            Agenda
         });
        
-        const event = await newEvent.save();
+        const response = await newEvent.save();
         
         return{
             msg: "success",
