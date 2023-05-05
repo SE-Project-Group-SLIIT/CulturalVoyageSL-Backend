@@ -83,12 +83,19 @@ module.exports.updateEventService = async (req, res) => {
             eventName : req.eventName,
             eventDescription : req.eventDescription,
             eventType :req.eventType,
-            Date : req.Date,
+            dateFrom:req.dateFrom,
+            dateTo:req.dateTo, 
             Time : req.Time,
             Location : req.Location,
             Performer : req.Performer,
             contactPerson : req.contactPerson,
             Contact : req.Contact,
+            imageOne:req.imageOne,
+            imageTwo:req.imageTwo,
+            imageThree:req.imageThree,
+            Agenda:req.Agenda
+           
+        
         
         } },
   
