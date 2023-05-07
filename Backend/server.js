@@ -19,9 +19,13 @@ connection.once("open", () => {
   console.log("Mongodb Connection Success !" , PORT);
 });
 
-const eventRoutes = require("./routes/eventRoutes")
+const eventRoutes = require("./routes/eventRoutes");
+const postRoutes = require("./routes/postRoutes");
+const replyRoutes = require("./routes/replyRoutes")
 
-app.use("/event",eventRoutes)
+app.use("/event",eventRoutes);
+app.use("/post",postRoutes);
+app.use("/reply",replyRoutes);
 
 app.listen(PORT, () => {
     console.log(`server is up and running on port:${PORT}`);
