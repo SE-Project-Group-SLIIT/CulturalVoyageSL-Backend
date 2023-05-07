@@ -5,13 +5,6 @@ const userService = require("../services/userService");
 module.exports.createUserController = async(req,res) =>{
     console.log("user controller");
     try {
-        console.log("user controller try");
-        //const {error} = userValidationSchema(req);
-        if(error){
-            console.log("Validation Failed");
-            return res.status(300).send({message: "Validation Failed...!", err: error});
-        }
-
         let serviceResponse = await userService.createUserService(req);
         if((serviceResponse.msg = "success")){
             // return serviceResponse
