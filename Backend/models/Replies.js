@@ -2,13 +2,7 @@ const mongoose =require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const post = new Schema({
-
-    title: {
-        type : String,
-        required : true, 
-    },
-
+const reply = new Schema({
     message: {
         type : String,
         required : true, 
@@ -27,11 +21,8 @@ const post = new Schema({
         default : true,
     },
 
-    keyWords : {
-        type: String
-    }
 
 })
 
-const Event = mongoose.model("Post",post);
+const Event = mongoose.model("Reply",reply);
 module.exports=Event;

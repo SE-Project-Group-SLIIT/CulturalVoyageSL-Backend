@@ -1,26 +1,22 @@
 const { response } = require("express");
 const mongoose = require("mongoose");
-const Post = require("../models/Posts");
+const Reply = require("../models/Replies");
 
-module.exports.addPostService = async(req,res) =>{
+module.exports.addReplyService = async(req,res) =>{
     try{
-      const title = req.title;
       const message = req.message;
       const user =req.user;
       const likes = Number(req.likes);
       const messageStatus = req.messageStatus;
-      const keyWords = req.keyWords;
 
-      const newPost = new Post({
-        title,
+      const newReply = new Reply({
         message, 
         user, 
         likes, 
         messageStatus, 
-        keyWords, 
       });
      
-      const response = await newPost.save();
+      const response = await newReply.save();
         
         return{
             msg: "success",
@@ -32,9 +28,9 @@ module.exports.addPostService = async(req,res) =>{
 }
 
 //view all events 
-module.exports.viewPostService = async(req,res) =>{
+module.exports.viewReplyService = async(req,res) =>{
     try{
-        let response = await Post.find();
+        let response = await Reply.find();
 
         if(response){
             return{
