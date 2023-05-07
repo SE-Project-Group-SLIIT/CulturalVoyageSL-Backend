@@ -20,8 +20,12 @@ connection.once("open", () => {
 });
 
 const eventRoutes = require("./routes/eventRoutes")
+const loginRouter = require("./routes/loginRoutes")
+const userRouter = require("./routes/userRoutes")
 
 app.use("/event",eventRoutes)
+app.use("/login",loginRouter)
+app.use("/user",userRouter)
 
 app.listen(PORT, () => {
     console.log(`server is up and running on port:${PORT}`);
