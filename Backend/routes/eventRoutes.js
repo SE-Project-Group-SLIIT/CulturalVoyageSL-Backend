@@ -53,7 +53,7 @@ router.route("/searchEvents/").post((req, res) => {
 
   //route for single view of Events 
 
-router.route("/singleView/").get((req, res) => {
+router.route("/eventSingle").post((req, res) => {
   console.log("req>>>>>",req.body);
   const response = eventController.singleViewEventsController(
     req.body,
