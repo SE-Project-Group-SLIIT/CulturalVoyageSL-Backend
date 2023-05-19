@@ -5,10 +5,10 @@ let User = require('../models/Users');
 // create service for login
 module.exports.loginService = async(req,res)=>{
     try {
-        let email = req.Email;
-        let password = req.Password;
-        console.log(password,email)
-        let response = await Buyer.find({Email: email,Password:password});
+        let Email = req.Email;
+        let Password = req.Password;
+        console.log(Password,Email)
+        let response = await Buyer.find({Email: Email,Password:Password});
         console.log(response)
 
         if (response) {
