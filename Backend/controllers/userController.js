@@ -1,10 +1,18 @@
 const {response} = require("express");
 const userService = require("../services/userService");
+const {userValidationSchema} = require("../validation/userValidation");
 
 // controller for add User
 module.exports.createUserController = async(req,res) =>{
     console.log("user controller");
     try {
+        console.log("user controller try");
+        const {error} = userValidationSchema(req);
+        if(error){
+            console.log("Vaalidation Failed");
+            return res.status(300).send({message: "Vaalidation Failed...!", err: error});
+        }
+
         let serviceResponse = await userService.createUserService(req);
         if((serviceResponse.msg = "success")){
             // return serviceResponse

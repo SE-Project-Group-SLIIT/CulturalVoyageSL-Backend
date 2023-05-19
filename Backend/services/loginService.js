@@ -8,7 +8,7 @@ module.exports.loginService = async(req,res)=>{
         let Email = req.Email;
         let Password = req.Password;
         console.log(Password,Email)
-        let response = await Buyer.find({Email: Email,Password:Password});
+        let response = await User.find({Email: Email,Password:Password});
         console.log(response)
 
         if (response) {
