@@ -126,3 +126,28 @@ module.exports.updateEventController = async (req, res) => {
       });
     }
   };
+
+  module.exports.singleViewEventsController = async (req, res) => {
+    try {
+  
+  
+      let eventResponse = await eventService.singleViewEventService(req);
+  
+      if (eventResponse.msg === "success") {
+        return res.status(200).send({
+          message: "Events found",
+          data: eventResponse.data,
+        });
+      } else {
+        return res.status(400).send({
+          message: "Failed to find event",
+          data: null,
+        });
+      }
+    } catch (err) {
+      return res.status(500).send({
+        message: "Internal server error",
+        err: err.message,
+      });
+    }
+  };

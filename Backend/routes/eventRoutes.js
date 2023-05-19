@@ -19,7 +19,7 @@ router.route("/addEvent").post((req,res) => {
 
   
     //route for update Events
-router.route("/updateEvent").put((req, res) => {
+router.route("/updateEvent").post((req, res) => {
     console.log("req>>>>", req.body)
   
     const response = eventController.updateEventController(req.body, res);
@@ -27,7 +27,7 @@ router.route("/updateEvent").put((req, res) => {
   });
 
     //route for delete Events
-router.route("/deleteEvent").delete((req, res) => {
+router.route("/deleteEvent").post((req, res) => {
     console.log("req>>>>", req.body)
     const response = eventController.deleteEventController(req.body, res);
   
@@ -35,7 +35,7 @@ router.route("/deleteEvent").delete((req, res) => {
   
     //route for filter Events by type
 
-router.route("/filterEvents/").get((req, res) => {
+router.route("/filterEvents/").post((req, res) => {
   console.log("req>>>>>",req.body);
   const response = eventController.searchEventController(
     req.body,
@@ -44,9 +44,18 @@ router.route("/filterEvents/").get((req, res) => {
 
      //route for search Events by name
 
-router.route("/searchEvents/").get((req, res) => {
+router.route("/searchEvents/").post((req, res) => {
   console.log("req>>>>>",req.body);
   const response = eventController.searchEventByNameController(
+    req.body,
+    res)
+  });
+
+  //route for single view of Events 
+
+router.route("/singleView/").get((req, res) => {
+  console.log("req>>>>>",req.body);
+  const response = eventController.singleViewEventsController(
     req.body,
     res)
   });

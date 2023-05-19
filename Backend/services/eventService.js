@@ -194,4 +194,28 @@ module.exports.searchEventsService = async(req,res) =>{
         throw err;
     }
   }
+
+    //search events 
+    module.exports.singleViewEventService = async(req,res) =>{
+      console.log("request", req)
+    
+      try{
+        const id = req._id;
+          let response = await Event.findById({ _id: id  });
+    
+          if(response){
+              return{
+                  msg: "success",
+                  data: response,
+              };
+          }else{
+              return{
+                  msg:"faild",
+                  data:response,
+              }
+          }
+      }catch (err){
+          throw err;
+      }
+    }
   
