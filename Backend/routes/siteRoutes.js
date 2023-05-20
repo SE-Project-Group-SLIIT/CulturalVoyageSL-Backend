@@ -4,6 +4,7 @@ const siteController = require("../controllers/siteController");
 
 // route for add new site
 router.route("/addSite").post((req,res)=>{
+    console.log("req>>>");
     const response = siteController.addSiteController(req.body, res)
 });
 
@@ -34,7 +35,7 @@ router.route("/updateSite/:id").post((req,res)=>{
 });
 
 // route for delete site
-router.route("deleteSite").delete((req,res) => {
+router.route("/deleteSite").delete((req,res) => {
     
     const response = siteController.deleteSiteController(req.body , res);
 });

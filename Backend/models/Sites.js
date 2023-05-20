@@ -46,6 +46,42 @@ const site = new Schema({
     Behaviour : {
         type: String,
         required: true
+    },
+
+    SiteImage1 : {
+        public_id: {
+            type: String
+        },
+        url: {
+            type: String
+        }
+    },
+
+    SiteImage2 : {
+        public_id: {
+            type: String
+        },
+        url: {
+            type: String
+        }
+    },
+
+    SiteImage3 : {
+        public_id: {
+            type: String
+        },
+        url: {
+            type: String
+        }
+    },
+
+    SiteImage4 : {
+        public_id: {
+            type: String
+        },
+        url: {
+            type: String
+        }
     }
 })
 

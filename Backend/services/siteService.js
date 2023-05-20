@@ -1,6 +1,7 @@
 const { response } = require("express");
 const mongoose = require("mongoose");
 const Site = require("../models/Sites");
+const cloudinary = require("../utils/cloudinary");
 
 // service for add new site
 module.exports.addSiteService = async (req, res) => {
@@ -13,6 +14,34 @@ module.exports.addSiteService = async (req, res) => {
         const TicketingDetails = req.TicketingDetails;
         const DressCode = req.DressCode;
         const Behaviour = req.Behaviour;
+        const SiteImage1 = req.SiteImage1;
+        const SiteImage2 = req.SiteImage2;
+        const SiteImage3 = req.SiteImage3;
+        const SiteImage4 = req.SiteImage4;
+
+        const result1 = await cloudinary.uploader.upload(SiteImage1, {
+            floder: "site",
+            // width: 300,
+            // crop: "scale"
+        });
+
+        const result2 = await cloudinary.uploader.upload(SiteImage2, {
+            folder: "site",
+            // width: 300,
+            // crop: "scale"
+        });
+
+        const result3 = await cloudinary.uploader.upload(SiteImage3, {
+            folder: "site",
+            // width: 300,
+            // crop: "scale"
+        });
+
+        const result4 = await cloudinary.uploader.upload(SiteImage4, {
+            folder: "site",
+            // width: 300,
+            // crop: "scale"
+        });
 
         const newSite = new Site({
             SiteName,
@@ -22,10 +51,27 @@ module.exports.addSiteService = async (req, res) => {
             VisitingHours,
             TicketingDetails,
             DressCode,
-            Behaviour
+            Behaviour,
+            SiteImage1: {
+                public_id: result1.public_id,
+                url : result1.secure_url
+            },
+            SiteImage2: {
+                public_id : result2.public_id,
+                url: result2.secure_url
+            },
+            SiteImage3: {
+                public_id: result3.public_id,
+                url: result3.secure_url
+            },
+            SiteImage4: {
+                public_id: result4.public_id,
+                url: result4.secure_url
+            }
         });
 
         const site = await newSite.save();
+        console.log("new site>>>");
 
         return {
             msg: "success",
