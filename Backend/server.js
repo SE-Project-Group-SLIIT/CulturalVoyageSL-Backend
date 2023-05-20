@@ -27,6 +27,10 @@ app.use("/event",eventRoutes);
 app.use("/post",postRoutes);
 app.use("/reply",replyRoutes);
 
+
+
 app.listen(PORT, () => {
     console.log(`server is up and running on port:${PORT}`);
 })
+
+module.exports = { app };
