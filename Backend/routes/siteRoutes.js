@@ -4,7 +4,8 @@ const siteController = require("../controllers/siteController");
 
 // route for add new site
 router.route("/addSite").post((req,res)=>{
-    console.log("req>>>");
+    console.log("req>>>",req);
+    console.log(req.body);
     const response = siteController.addSiteController(req.body, res)
 });
 
@@ -20,12 +21,14 @@ router.route("/viewSites/:SiteCategory").get((req,res)=>{
         SiteCategory : SiteCategory,
         body: req.body,
     };
+    console.log("getData",getData);
 
     const response = siteController.viewSiteCategoryController(getData, res);
 });
 
 // route for update site
 router.route("/updateSite/:id").post((req,res)=>{
+    console.log("updateRoute>>",req.body);
     let id = req.params.id;
     let updateSite ={
         id: id,
@@ -35,8 +38,8 @@ router.route("/updateSite/:id").post((req,res)=>{
 });
 
 // route for delete site
-router.route("/deleteSite").delete((req,res) => {
-    
+router.route("/deleteSite/").delete((req,res) => {
+    console.log("delete route",req.body);
     const response = siteController.deleteSiteController(req.body , res);
 });
 
@@ -52,9 +55,15 @@ router.route("/getSite/:id").get((req, res)=>{
 });
 
 // route for search site by name
-router.route("/searchSite/").get((req,res)=>{
-    console.log("search>>>", req.body);
-    const response = siteController.searchSiteNameController(req.body, res);
+router.route("/searchSite/:SiteName").get((req,res)=>{
+    let SiteName = req.params.SiteName;
+    console.log(SiteName);
+    console.log("search>>>", req);
+    let getData = {
+        SiteName:SiteName,
+        body:req.body
+    }
+    const response = siteController.searchSiteNameController(getData, res);
 });
 
 

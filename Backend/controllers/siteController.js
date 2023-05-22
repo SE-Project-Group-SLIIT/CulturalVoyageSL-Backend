@@ -58,8 +58,9 @@ module.exports.viewSiteCategoryController = async(req,res) => {
 // contraller for update sites
 module.exports.updateSiteController = async(req,res) => {
     try {
+      console.log("controller",req);
         let siteResponse = await siteService.updateSiteService(req);
-
+        console.log("siteResponse>>",siteResponse);
         if (siteResponse.msg === "success") {
             return res.status(200).send({
               message: "Site updated",

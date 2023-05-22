@@ -131,8 +131,10 @@ module.exports.viewSiteCategoryService = async (req,res) =>{
 module.exports.updateSiteService = async(req, res) => {
     try {
         let id = req.id;
-        console.log("id: ", req.id);
+        console.log("req: ", req);
         let idString = id.toString();
+
+        const currentSite = await Site.findById(idString);
 
         // let response = await Site.findOneAndUpdate(
         //     { _id: id },
@@ -149,43 +151,126 @@ module.exports.updateSiteService = async(req, res) => {
         //         }
         //     },
         // );
-        const {
-            SiteName,
-            SiteCategory,
-            Description,
-            Value,
-            VisitingHours,
-            TicketingDetails,
-            DressCode,
-            Behaviour
-        } = req.body;
+        const data = {
+            SiteName: req.body.SiteName,
+            SiteCategory: req.body.SiteCategory,
+            Description: req.body.Description,
+            Value: req.body.Value,
+            VisitingHours: req.body.VisitingHours,
+            TicketingDetails: req.body.TicketingDetails,
+            DressCode: req.body.DressCode,
+            Behaviour: req.body.Behaviour,
+            // SiteImage1: req.body.SiteImage1,
+            // SiteImage2: req.body.SiteImage2,
+            // SiteImage3: req.body.SiteImage3,
+            // SiteImage4: req.body.SiteImage4
+        } 
 
-        const updateSite = {
-            SiteName,
-            SiteCategory,
-            Description,
-            Value,
-            VisitingHours,
-            TicketingDetails,
-            DressCode,
-            Behaviour
-        };
-        let response = await Site.findByIdAndUpdate({_id: idString}, updateSite);
+        // modify image conditionally
+        // if(req.body.SiteImage1 !==''){
+        //     console.log("!==");
+        //     const ImgId = currentSite.SiteImage1.public_id;
+        //     console.log("ImgId",ImgId);
+        //     if(ImgId){
+        //         console.log("if",ImgId);
+        //         await cloudinary.uploader.destroy(ImgId);
+        //         console.log("destroy",ImgId);
+        //     }
+
+        //     const newSiteImage1 = await cloudinary.uploader.upload(req.body.SiteImage1,{
+        //         floder: "site"
+        //     });
+
+        //     console.log("newSiteImage1",newSiteImage1);
+
+        //     data.SiteImage1 = {
+        //         public_id: newSiteImage1.public_id,
+        //         url : newSiteImage1.secure_url
+        //     }
+        // }
+
+        // if(req.body.SiteImage2 !==''){
+        //     console.log("2 !==");
+        //     const ImgId = currentSite.SiteImage2.public_id;
+        //     if(ImgId){
+        //         await cloudinary.uploader.destroy(ImgId);
+        //     }
+
+        //     const newSiteImage2 = await cloudinary.uploader.upload(req.body.SiteImage2,{
+        //         floder: "site"
+        //     });
+
+        //     data.SiteImage2 = {
+        //         public_id: newSiteImage2.public_id,
+        //         url : newSiteImage2.secure_url
+        //     }
+        // }
+
+        // if(req.body.SiteImage3 !==''){
+        //     console.log("3 !==");
+        //     const ImgId = currentSite.SiteImage3.public_id;
+        //     if(ImgId){
+        //         await cloudinary.uploader.destroy(ImgId);
+        //     }
+
+        //     const newSiteImage3 = await cloudinary.uploader.upload(req.body.SiteImage3,{
+        //         floder: "site"
+        //     });
+
+        //     data.SiteImage3 = {
+        //         public_id: newSiteImage3.public_id,
+        //         url : newSiteImage3.secure_url
+        //     }
+        // }
+
+        // if(req.body.SiteImage4 !==''){
+        //     console.log("!==");
+        //     const ImgId = currentSite.SiteImage4.public_id;
+        //     if(ImgId){
+        //         await cloudinary.uploader.destroy(ImgId);
+        //     }
+
+        //     const newSiteImage4 = await cloudinary.uploader.upload(req.body.SiteImage4,{
+        //         floder: "site"
+        //     });
+
+        //     data.SiteImage4 = {
+        //         public_id: newSiteImage4.public_id,
+        //         url : newSiteImage4.secure_url
+        //     }
+        // }
+
+        // const updateSite = {
+        //     SiteName,
+        //     SiteCategory,
+        //     Description,
+        //     Value,
+        //     VisitingHours,
+        //     TicketingDetails,
+        //     DressCode,
+        //     Behaviour,
+        //     SiteImage1
+        // };
+        console.log("updateService",data);
+        let response = await Site.findOneAndUpdate({_id: idString}, data, {new:true});
 
         console.log("res", response);
 
         if (response) {
+            console.log("service res", response);
             return {
                 msg: "success",
                 data: response,
             };
         } else {
+            console.log("service res fail", response);
             return {
                 msg: "fail",
                 data: response,
             };
         }
     } catch (err) {
+        console.log("service res err", err);
         throw err;
     }
 };
@@ -242,11 +327,12 @@ module.exports.getOneSiteService = async(req, res)=>{
 // service for search sites by site name
 module.exports.searchSiteNameService = async(req,res)=>{
     console.log("request", req);
+    console.log(req.SiteName);
 
     try {
-        const Value = req.SiteName;
+        const SiteName = req.SiteName;
         
-        let response = await Site.find({SiteName: {$regex: ".*" + Value + ".*", $options: 'i'}});
+        let response = await Site.find({SiteName: {$regex: ".*" + SiteName + ".*", $options: 'i'}});
 
         if(response){
             return{
