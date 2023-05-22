@@ -12,11 +12,22 @@ const event = new Schema({
 
     eventDescription : {
         type : String,
+        maxlength : 2500,
+        required : true,
+    },
+
+    eventType : {
+        type : String,
         maxlength : 300,
         required : true,
     },
 
-    Date : {
+    dateFrom : {
+        type : String,
+        required : true,
+    },
+
+    dateTo :{
         type : String,
         required : true,
     },
@@ -46,6 +57,22 @@ const event = new Schema({
         type : Number,
         maxlength : 11,
     },
+
+    imageOne : {
+        type : String,
+    },
+
+    imageTwo : {
+        type : String,
+    },
+
+    imageThree : {
+        type : String,
+    },
+
+    Agenda :{
+        type : String,
+    }
 
     // image,video,agenda as image need to add
 
