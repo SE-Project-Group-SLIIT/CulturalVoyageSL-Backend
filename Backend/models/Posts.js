@@ -40,7 +40,7 @@ const post = new Schema({
     }
 
 })
-
+post.index({ title: "text", message: "text" });
 
 
 const Event = mongoose.model("Post",post);

@@ -17,5 +17,15 @@ router.route("/view").get((req, res) => {
     );
 });
 
+  //retrive all comments
+  router.route("/search").post((req, res) => {
+    console.log("req",req.body)
+    const response = postController.searchPostController(
+      req.body,
+      res
+    );
+});
+
+
 
 module.exports = router;
