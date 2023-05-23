@@ -6,8 +6,8 @@ module.exports.addPostService = async(req,res) =>{
     try{
       const title = req.title;
       const message = req.message;
-      const user =req.user;
-      const likes = Number(req.likes);
+      const user = req.user;
+      const likes = 0;
       const messageStatus = req.messageStatus;
       const keyWords = req.keyWords;
 
@@ -19,9 +19,9 @@ module.exports.addPostService = async(req,res) =>{
         messageStatus, 
         keyWords, 
       });
-     
+      
       const response = await newPost.save();
-        
+
         return{
             msg: "success",
             data: response,
@@ -34,8 +34,7 @@ module.exports.addPostService = async(req,res) =>{
 //view all events 
 module.exports.viewPostService = async(req,res) =>{
     try{
-        let response = await Post.find();
-
+        let response = await Post.find().populate("replies").exec();
         if(response){
             return{
                 msg: "success",

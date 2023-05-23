@@ -12,6 +12,10 @@ const reply = new Schema({
         type: Schema.Types.ObjectId,
     },
 
+    post: {
+        type: Schema.Types.ObjectId,
+    },
+
     likes : {
         type: Number
     },

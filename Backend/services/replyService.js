@@ -1,22 +1,32 @@
 const { response } = require("express");
 const mongoose = require("mongoose");
 const Reply = require("../models/Replies");
+const Post = require("../models/Posts")
 
 module.exports.addReplyService = async(req,res) =>{
     try{
       const message = req.message;
       const user =req.user;
-      const likes = Number(req.likes);
+      const post = req.post;
+      const likes = 0;
       const messageStatus = req.messageStatus;
 
       const newReply = new Reply({
         message, 
         user, 
+        post,
         likes, 
         messageStatus, 
       });
      
       const response = await newReply.save();
+      const numRepliesToIncrement = 1;
+
+        if(response){
+            let responses = await  Post.findByIdAndUpdate(response.post,{
+                $inc: { replies: numRepliesToIncrement }
+            });
+        }
         
         return{
             msg: "success",
@@ -30,7 +40,8 @@ module.exports.addReplyService = async(req,res) =>{
 //view all events 
 module.exports.viewReplyService = async(req,res) =>{
     try{
-        let response = await Reply.find();
+        let id = req.id;
+        let response = await Reply.find({'post': id});
 
         if(response){
             return{
