@@ -1,12 +1,13 @@
 const { response } = require("express");
 const mongoose = require("mongoose");
 const Reply = require("../models/Replies");
-const Post = require("../models/Posts")
+const Post = require("../models/Posts");
 
 module.exports.addReplyService = async(req,res) =>{
+
     try{
       const message = req.message;
-      const user =req.user;
+      const user = req.user;
       const post = req.post;
       const likes = 0;
       const messageStatus = req.messageStatus;
