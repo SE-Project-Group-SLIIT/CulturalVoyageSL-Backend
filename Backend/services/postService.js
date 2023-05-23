@@ -19,10 +19,9 @@ module.exports.addPostService = async(req,res) =>{
         messageStatus, 
         keyWords, 
       });
-      console.log(newPost)
-     console.log("awa")
+      
       const response = await newPost.save();
-      console.log("awa", response)
+
         return{
             msg: "success",
             data: response,
@@ -35,8 +34,7 @@ module.exports.addPostService = async(req,res) =>{
 //view all events 
 module.exports.viewPostService = async(req,res) =>{
     try{
-        let response = await Post.find();
-
+        let response = await Post.find().populate("replies").exec();
         if(response){
             return{
                 msg: "success",

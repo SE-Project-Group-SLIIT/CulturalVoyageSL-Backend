@@ -1,4 +1,5 @@
 const mongoose =require("mongoose");
+const { type } = require("os");
 
 const Schema = mongoose.Schema;
 
@@ -18,6 +19,13 @@ const post = new Schema({
         type: Schema.Types.ObjectId,
     },
 
+    replies: {
+        type: Number,
+        default : 0,
+    }
+        
+    ,
+
     likes : {
         type: Number
     },
@@ -32,6 +40,8 @@ const post = new Schema({
     }
 
 })
+
+
 
 const Event = mongoose.model("Post",post);
 module.exports=Event;
