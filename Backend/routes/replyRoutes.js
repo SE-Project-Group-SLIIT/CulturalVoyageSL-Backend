@@ -10,9 +10,14 @@ router.route("/add").post((req,res) => {
 });
     
   //retrive all comments
-router.route("/view").get((req, res) => {
+router.route("/view/:id").get((req, res) => {
+  let id = req.params.id;
+  let searchData = {
+    id: id,
+    body: req.body,
+  };
     const response = replyController.viewReplyController(
-      req.body.data,
+      searchData,
       res
     );
 });

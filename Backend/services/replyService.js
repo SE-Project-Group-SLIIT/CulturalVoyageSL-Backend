@@ -6,16 +6,18 @@ module.exports.addReplyService = async(req,res) =>{
     try{
       const message = req.message;
       const user =req.user;
-      const likes = Number(req.likes);
+      const post = req.post;
+      const likes = 0;
       const messageStatus = req.messageStatus;
 
       const newReply = new Reply({
         message, 
         user, 
+        post,
         likes, 
         messageStatus, 
       });
-     
+     console.log("awa")
       const response = await newReply.save();
         
         return{
@@ -30,7 +32,8 @@ module.exports.addReplyService = async(req,res) =>{
 //view all events 
 module.exports.viewReplyService = async(req,res) =>{
     try{
-        let response = await Reply.find();
+        let id = req.id;
+        let response = await Reply.find({'post': id});
 
         if(response){
             return{

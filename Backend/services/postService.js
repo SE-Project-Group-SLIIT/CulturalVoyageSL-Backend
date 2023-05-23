@@ -6,8 +6,8 @@ module.exports.addPostService = async(req,res) =>{
     try{
       const title = req.title;
       const message = req.message;
-      const user =req.user;
-      const likes = Number(req.likes);
+      const user = req.user;
+      const likes = 0;
       const messageStatus = req.messageStatus;
       const keyWords = req.keyWords;
 
@@ -19,9 +19,10 @@ module.exports.addPostService = async(req,res) =>{
         messageStatus, 
         keyWords, 
       });
-     
+      console.log(newPost)
+     console.log("awa")
       const response = await newPost.save();
-        
+      console.log("awa", response)
         return{
             msg: "success",
             data: response,
