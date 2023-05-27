@@ -79,7 +79,17 @@ module.exports.searchPostService = async (req, res) => {
             { score: { $meta: 'textScore' } }
           ).sort({ score: { $meta: 'textScore' } });
         
-          console.log(response);
+          if (response) {
+            return {
+                msg: "success",
+                data: response,
+            };
+        } else {
+            return {
+                msg: "faild",
+                data: response,
+            }
+        }
 
     } catch (err) {
         throw err;
