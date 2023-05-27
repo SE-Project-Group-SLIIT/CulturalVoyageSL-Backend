@@ -10,7 +10,15 @@ describe('Post Controller Tests', () => {
 
   describe('addPostController', () => {
     it('should add a post successfully', async () => {
-      const req = { /* mocked request object */ };
+      const req = { 
+        title: 'Test new  Event where it is?',
+        message: 'This is a test event',
+        user: '252552525252514',
+        replies: 5,
+        likes: 1,
+        messageStatus: true,
+        keyWords: 'Vehicle',
+       };
       const res = { status: jest.fn().mockReturnThis(), send: jest.fn() };
       const eventResponse = { msg: 'success' };
       postService.addPostService.mockResolvedValue(eventResponse);
@@ -23,7 +31,8 @@ describe('Post Controller Tests', () => {
     });
 
     it('should handle failed post addition', async () => {
-      const req = {  title: 'Test new  Event where it is?',
+      const req = {  
+      title: 'Test new  Event where it is?',
       message: 'This is a test event',
       user: '252552525252514',
       replies: 5,
